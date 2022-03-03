@@ -2,31 +2,36 @@ import './App.css';
 import Navbar from './components/Navbar';
 import CountriesList from './components/CountriesList';
 import CountryDetails from './components/CountryDetails';
-import countries from './countries.json'
+import countries from './countries.json';
 import { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-const countriesCopy = [...countries]
+const countriesCopy = [...countries];
 
 function App() {
-
-  const [countries, setCountries] = useState (countriesCopy)
+  const [countries, setCountries] = useState(countriesCopy);
 
   return (
-    <div className="App">
+    <div>
+      <Navbar />
 
-    <Navbar />
+      <div className="Container">
+        <div class="row">
+          <CountriesList countries={countries} />
 
-    <CountriesList   countries = {countries} />
-
-    <Routes>
-      {countries.map((country)=> (
-        <Route exact path={`/${country.alpha3Code}`} element={<CountryDetails country={country} />} />
-      ))}
-    </Routes>
-
+          <Routes>
+            {countries.map((country) => (
+              <Route
+                exact
+                path={`/${country.alpha3Code}`}
+                element={<CountryDetails country={country} />}
+              />
+            ))}
+          </Routes>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default App;
